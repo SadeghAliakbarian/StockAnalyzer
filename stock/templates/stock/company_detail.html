@@ -1,0 +1,52 @@
+{% extends 'stock/base.html' %}
+
+{% block title %}Details of {{ company.company_name }}{% endblock %}
+
+{% block content %}
+<div class="col-sm-12">
+<br>
+<h2> {{ company.company_name }}</h2>
+
+                <a href="#">
+                    <button type="button" class="btn btn-success">
+                        <span class="glyphicon glyphicon-search"></span>&nbsp; Intelli Query
+                    </button>
+                </a>
+     OR
+                <a href="{% url 'stock_chart_view' company.id %}">
+                    <button type="button" class="btn btn-success">
+                        <span class="glyphicon glyphicon-stats"></span>&nbsp; Intelli Visualizer
+                    </button>
+                </a>
+
+
+<br><br><br>
+
+This dataset has {{col_count}} columns:
+<br>
+{% for col in columns %}
+    <b>{{col}}, &#09;</b>
+{% endfor %}
+
+<br><br>
+The first 5 elements of {{ company.company_name }} are listed below:<br>
+
+<table>
+  <tr>
+      {%for col in columns %}
+            <th>{{col}}</th>
+      {% endfor %}
+  </tr>
+     {% for list_row in data %}
+        <tr>
+            {% for item in list_row %}
+               <td> {{item}} </td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+</table>
+
+
+<br>
+    </div>
+{% endblock %}

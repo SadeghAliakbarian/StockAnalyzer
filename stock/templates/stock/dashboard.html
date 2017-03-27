@@ -1,0 +1,119 @@
+{% extends 'stock/base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-sm-12 col-md-7">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>My Dashboard</h3>
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+                    <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% include 'stock/form_template.html' %}
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-success">Create Dashboard</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-5">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <a class="navbar-brand" href="{% url 'index' %}"><h1>StockS</h1></a><br><br><br><br>
+                    <p>StockS is an app that allows you to upload and store all of your company's databases on the cloud and get queries and visualize your data.</p>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% if stock_chart %}
+<div class="col-sm-12">
+<div class="col-sm-4 col-lg-2">
+                        <div class="caption">
+                            <h3>Stock Volume</h3>
+                            <h4>With the average stock volume of {{volume.0}}</h4>
+                            <h5>Maximum is {{volume.1}}</h5>
+                            <h5>Minimum is {{volume.2}}</h5>
+                            <h5>Difference is {{volume.3}}</h5>
+
+                        </div>
+</div>
+{% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
+
+<div class="col-sm-4 col-lg-2">
+                        <div class="caption">
+                            <h3>Stock Open</h3>
+                            <h4>With the average stock price of {{open.0}}</h4>
+                            <h5>Maximum is {{open.1}}</h5>
+                            <h5>Minimum is {{open.2}}</h5>
+                            <h5>Difference is {{open.3}}</h5>
+
+                        </div>
+</div>
+{% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
+
+<div class="col-sm-4 col-lg-2">
+                        <div class="caption">
+                            <h3>Stock Close</h3>
+                            <h4>With the average stock price of {{close.0}}</h4>
+                            <h5>Maximum is {{close.1}}</h5>
+                            <h5>Minimum is {{close.2}}</h5>
+                            <h5>Difference is {{close.3}}</h5>
+
+                        </div>
+</div>
+{% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
+
+<div class="col-sm-4 col-lg-2">
+                        <div class="caption">
+                            <h3>Stock High</h3>
+                            <h4>With the average stock price of {{high.0}}</h4>
+                            <h5>Maximum is {{high.1}}</h5>
+                            <h5>Minimum is {{high.2}}</h5>
+                            <h5>Difference is {{high.3}}</h5>
+                        </div>
+</div>
+{% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
+
+<div class="col-sm-4 col-lg-2">
+                        <div class="caption">
+                            <h3>Stock Low</h3>
+                            <h4>With the average stock price of {{low.0}}</h4>
+                            <h5>Maximum is {{low.1}}</h5>
+                            <h5>Minimum is {{low.2}}</h5>
+                            <h5>Difference is {{low.3}}</h5>
+
+                        </div>
+</div>
+{% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<div class="row">
+    <div class="col-sm-12 col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                {% load chartit %}
+                    {{ stock_chart|load_charts:"cht" }}
+                    <div id="cht">Chart will be rendered here</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}

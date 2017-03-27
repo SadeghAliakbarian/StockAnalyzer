@@ -1,0 +1,14 @@
+{% extends 'stock/base.html' %}
+
+{% block title %}Project{% endblock %}
+
+{% block content %}
+<div class="col-sm-12">
+<h1>Encouraging LSTMs to Anticipate Very Early</h1><br>
+    <hr>
+<h4>Abstract: </h4>
+     Action anticipation is a key to the success of many computer vision applications which has been rarely explored compared to action recognition. Most of the studies in action understanding focus on recognizing the action when the whole sequence is available, while in anticipation, the sequence is partially provided. In this paper, we propose a new action anticipation method which perform very accurate for early prediction. To this end, we develop a novel loss function that encourage the model to predict the correct class as early as possible. Moreover, to enrich the video representation, we propose a new approach that leverages context-aware and action-aware features in a new Multi-Stage LSTM. This architecture first exploits the global, context-aware features, and merges the resulting representation with the localized, action-aware ones. Experiments on standard datasets evidence the benefits of our approach. We outperform the state-of-the-art methods that, as us, rely only on RGB frames as input for both action anticipation and recognition.
+    <h4>Method: </h4>
+    We propose to extract context-aware features, encoding global information about the scene, and combine them with action-aware ones, which focus on the action itself. To this end, we introduce a multi-stage LSTM architecture that leverages the two types of features to predict the action or forecast it. Note that, for the sake of visualization, the color maps were obtained from 3D tensors (512xWxH) via an average pooling operation over the 512 channels.
+</div>
+{% endblock %}
